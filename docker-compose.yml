@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c 'cd /workspace/myapp && yarn start'
+    ports:
+      - '3000:3000'
+    tty: true
+    working_dir: /workspace
+    container_name: react-frontend
