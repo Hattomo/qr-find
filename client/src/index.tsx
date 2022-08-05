@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateQRHome from './CreateQRHome';
+import FoundQRHome from "./FoundQRHome";
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CreateQRHome/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CreateQRHome />} />
+        <Route path="FoundQRHome" element={<FoundQRHome />} />
+        <Route path="CreateQRHome" element={<CreateQRHome />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
