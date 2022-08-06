@@ -1,0 +1,14 @@
+.QRcodeReader {
+    max-width: 100%;
+}
+
+.push_back_button{
+    background-color: #005FB0;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin-left: auto;
+    border: none;
+    outline: none;
+}
