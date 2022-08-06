@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import './Common.css'
 import './FoundQRHome.css';
 
 function FoundQRHome() {
@@ -9,13 +10,17 @@ function FoundQRHome() {
         <div>
             <header className="App-header">
                 <h1>QR Find</h1>
+                <Link to="/CreateQRHome">
+                    <button className="CreatePageButton" onClick={test}>Create QR →</button>
+                </Link>
             </header>
             <body className='App body'>
-                <Link to="/CreateQRHome">
-                    <button className="FindPageButton" onClick={test}>Go to found page</button>
-                </Link>
-                <input type="email" placeholder="Input your mail📩"></input>
-                <button className='MakeQRButton' onClick={test}>Make QR</button>
+                <h3>Scan QR Code</h3>
+                <button className='ScanQRButton' onClick={test}>Scan QR</button>
+                <h3>Input messages to ower</h3>
+                <textarea placeholder="Input meassage. &#10;ex. &#10; I found at starbacks in Tokyo station and delived to Tokyo police box"></textarea>
+                <p></p>
+                <button className='ScanQRButton' onClick={test}>Submit</button>
             </body>
         </div>
     );

@@ -4,7 +4,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateQRHome from './CreateQRHome';
 import FoundQRHome from "./FoundQRHome";
-import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -1,20 +1,55 @@
+.App-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .FindPageButton {
-    background-color: rgb(231, 76, 60);
+    background-color: #005FB0;
     color: white;
     padding: 0.8rem;
-    border-radius: 0.4rem;
+    border-radius: 1rem;
     cursor: pointer;
+    margin-left: auto;
+    border: none;
+    outline: none;
 }
 
 .MakeQRButton {
-    background-color: rgb(231, 76, 60);
+    background-color: #005FB0;
     color: white;
     padding: 0.8rem;
-    border-radius: 0.4rem;
+    border-radius: 1rem;
     cursor: pointer;
+    margin-top: 20px;
+    border: none;
+    outline: none;
 }
 
-input[type=email] {
-    border: 2px solid red;
-    border-radius: 4px;
+input:focus {
+    outline-color: #005FB0;
+
+}
+
+input {
+    outline-color: #DFE7F4;
+    border-radius: 8px;
+    border: 2px solid #D8E3F8;
+    background-color: #DFE7F4;
+    height: 2rem;
+    max-width: 100%;
+    width: 100rem;
+}
+
+textarea:focus {
+    outline-color: #005FB0;
+}
+
+textarea {
+    outline-color: #DFE7F4;
+    border-radius: 8px;
+    border: 2px solid #D8E3F8;
+    background-color: #DFE7F4;
+    height: 4rem;
+    max-width: 100%;
 }

@@ -1,0 +1,40 @@
+.App-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CreatePageButton {
+    background-color: #005FB0;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin-left: auto;
+    border: none;
+    outline: none;
+}
+
+.ScanQRButton {
+    background-color: #005FB0;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+textarea:focus {
+    outline-color: #005FB0;
+}
+
+textarea {
+    outline-color: #DFE7F4;
+    border-radius: 8px;
+    border: 2px solid #D8E3F8;
+    background-color: #DFE7F4;
+    height: 8rem;
+    max-width: 100%;
+    width: 100rem;
+}
