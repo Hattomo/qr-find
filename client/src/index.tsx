@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateQRHome from './CreateQRHome';
 import FoundQRHome from "./FoundQRHome";
 import QRReaderHome from './QRReaderHome';
+import QRGenerateHome from './QRGenerateHome';
 import PageNotFound from './PageNotFound'
 
 const root = ReactDOM.createRoot(
@@ -18,6 +19,7 @@ root.render(
         <Route path="/FoundQRHome" element={<FoundQRHome />} />
         <Route path="/CreateQRHome" element={<CreateQRHome />} />
         <Route path="/QRReaderHome" element={<QRReaderHome />} />
+        <Route path="/QRGenerateHome" element={<QRGenerateHome />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

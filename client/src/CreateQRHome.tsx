@@ -22,7 +22,9 @@ function CreateQRHome() {
                     <h3>Input Memo</h3>
                     <textarea placeholder="Input memo &#10;ex. Macbook"></textarea>
                 </div>
-                <button className='MakeQRButton' onClick={test}>Make QR</button>
+                <Link to="/QRGenerateHome">
+                    <button className='MakeQRButton' onClick={test}>Make QR</button>
+                </Link>
             </body>
         </div>
     );
