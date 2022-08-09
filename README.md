@@ -4,6 +4,7 @@
 ### Get Started
 ```sh
 cd client
+npm install
 npm start
 ```
 
