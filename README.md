@@ -38,3 +38,13 @@ https://zenn.dev/nakashi94/articles/f67fa9b54437da
 
 - SES
     - `send` : send email
+
+#### lambda
+```bash
+# golang
+go mod init xx
+go mod tidy
+
+# Deploy
+./lambda.sh <function_name>"
+```
