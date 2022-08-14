@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 echo -e "useage : ./lambda.sh <function_name>\n"
 dir=$1
