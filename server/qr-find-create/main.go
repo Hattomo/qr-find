@@ -21,8 +21,8 @@ import (
 
 // Item DBに入れるデータ
 type Item struct {
-    ID  string    `dynamodbav:"id" json:id`
-    Email   string `dynamodbav:"email" json:"email"`
+    ID    string `dynamodbav:"id" json:id`
+    Email string `dynamodbav:"email" json:"email"`
     Memo  string `dynamodbav:"memo" json:"memo"`
 }
 
@@ -56,7 +56,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
             StatusCode: 500,
         }, err
     }
-	
+
 	item.ID = GetHash()
 
     // Item構造体から、inputするデータを用意
@@ -84,6 +84,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
     // httpレスポンス作成
     res := Response{
         RequestMethod: method,
+		Result:        item,
     }
     jsonBytes, _ := json.Marshal(res)
 
