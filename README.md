@@ -4,7 +4,7 @@
 ### Get Started
 ```sh
 cd client
-npm install
+npm --legacy-peer-deps install
 npm start
 ```
 
