@@ -5,6 +5,11 @@ package main
 
 import (
     "encoding/json"
+	"crypto/sha256"
+	"time"
+	"encoding/hex"
+	"strconv"
+	"math/rand"
 
     "github.com/aws/aws-lambda-go/events"
     "github.com/aws/aws-lambda-go/lambda"
@@ -17,14 +22,14 @@ import (
 // Item DBに入れるデータ
 type Item struct {
     ID  string    `dynamodbav:"id" json:id`
-    Email   string `dynamodbav:"email" json:email`
-    Memo  string `dynamodbav:"memo" json:memo`
+    Email   string `dynamodbav:"email" json:"email"`
+    Memo  string `dynamodbav:"memo" json:"memo"`
 }
 
 // Response Lambdaが返答するデータ
 type Response struct {
-    RequestMethod string `json:RequestMethod`
-    Result        Item   `json:Result`
+    RequestMethod string `json:"RequestMethod"`
+    Result        Item   `json:"Result"`
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -51,6 +56,8 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
             StatusCode: 500,
         }, err
     }
+	
+	item.ID = GetHash()
 
     // Item構造体から、inputするデータを用意
     inputAV, err := dynamodbattribute.MarshalMap(item)
@@ -84,6 +91,22 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
         Body:       string(jsonBytes),
         StatusCode: 200,
     }, nil
+}
+
+func RandomString(n int) string {
+    var letter = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+
+    b := make([]rune, n)
+    for i := range b {
+        b[i] = letter[rand.Intn(len(letter))]
+    }
+    return string(b)
+}
+
+func GetHash() string {
+	var hash_str string = strconv.FormatInt(time.Now().Unix(),10) + RandomString(20)
+	hash := sha256.Sum256([]byte(hash_str))
+	return hex.EncodeToString(hash[:])
 }
 
 func main() {
