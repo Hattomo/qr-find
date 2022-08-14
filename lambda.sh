@@ -6,6 +6,7 @@ path=./server/$dir
 cd $path
 export DEBIAN_FRONTEND=noninteractive
 echo -e "\nBuilding...🚀"
+go mod tidy
 GOOS=linux GOARCH=amd64 go build -o hello main.go
 echo -e "\nZipping...🛸"
 zip hello.zip hello
