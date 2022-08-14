@@ -39,6 +39,7 @@ input {
     height: 2rem;
     max-width: 100%;
     width: 100rem;
+    font-size: large;
 }
 
 textarea:focus {
@@ -52,4 +53,5 @@ textarea {
     background-color: #DFE7F4;
     height: 4rem;
     max-width: 100%;
+    font-size: large;
 }
