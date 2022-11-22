@@ -34,9 +34,7 @@
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 	"features": {
-		"golang": {
-			"version" : "latest"
-		}
+		"ghcr.io/devcontainers/features/go:1": {}
 	},
 	"extensions": [
 		"golang.go",
