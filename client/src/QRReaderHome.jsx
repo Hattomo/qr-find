@@ -18,7 +18,7 @@ const CreateQRHome = (props) => {
         navigate('/FoundQRHome', { state: { data: data } })
     }
     return (
-        <div>
+        <>
             <header className='App-header'>
                 <h1>QR Reader</h1>
             </header>
@@ -39,9 +39,8 @@ const CreateQRHome = (props) => {
                 />
                 <p>{data}</p>
             </body>
-        </div>
+        </>
     );
 };
 
 export default CreateQRHome;
-

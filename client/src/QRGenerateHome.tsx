@@ -8,7 +8,7 @@ function QRGenerateHome() {
         console.log();
     }
     return (
-        <div>
+        <>
             <header className="App-header">
                 <h1>QR Generate</h1>
                 <Link to="/CreateQRHome">
@@ -19,7 +19,7 @@ function QRGenerateHome() {
                 <h3>Print QR Code</h3>
                 <QRCode title="QR" size={256} value="https://google.com" level="L" bgColor="#EDF0F8" />
             </body>
-        </div>
+        </>
     );
 }
 

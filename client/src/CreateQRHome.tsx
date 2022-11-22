@@ -3,6 +3,7 @@ import './Common.css'
 import './CreateQRHome.css';
 import axios from "axios";
 import { useState } from "react";
+import config from './config.json';
 
 function CreateQRHome() {
     const [state, setstate] = useState({
@@ -11,14 +12,13 @@ function CreateQRHome() {
     });
 
     function post_data() {
-        const config = {
+        const post_config = {
             headers: {
                 "Content-type": "application/json",
             },
-            mode: "cors",
         };
         console.log(state);
-        axios.post('https://vx8qxx1cnk.execute-api.us-east-1.amazonaws.com/default/create', { email: state.email, memo: state.memo }, config)
+        axios.post(config.create_api, { email: state.email, memo: state.memo }, post_config)
             .then(function (response) {
                 console.log(response);
             })
@@ -38,7 +38,7 @@ function CreateQRHome() {
     }
 
     return (
-        <div>
+        <>
             <header className="App-header">
                 <h1>QR Create</h1>
                 <Link to="/FoundQRHome">
@@ -57,7 +57,7 @@ function CreateQRHome() {
                     <button className='MakeQRButton' onClick={post_data} >Make QR</button>
                 </Link>
             </body>
-        </div>
+        </>
     );
 }
 

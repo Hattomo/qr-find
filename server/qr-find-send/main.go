@@ -1,3 +1,5 @@
+// curl -v -X POST -H "Content-Type: application/json" -d '{"memo":"ertyuio","id":"efreorifjeroi"}' https://vx8qxx1cnk.execute-api.us-east-1.amazonaws.com/default/send
+
 package main
 
 import (
@@ -31,12 +33,19 @@ type Response struct {
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	method := request.HTTPMethod
+	headers := map[string]string{
+		"Content-Type":                 "application/json",
+		"Access-Control-Allow-Origin": "http://localhost:3000",
+		"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+		"Access-Control-Allow-Headers": "Content-Type, Origin,Authorization,Accept,X-Requested-With",
+		"Access-Control-Allow-Credential": "true",
+	}
 	// pathparam := request.PathParameters["id"]
-
 	// DB接続
 	sess, err := session.NewSession()
 	if err != nil {
 		return events.APIGatewayProxyResponse{
+			Headers:    headers,
 			Body:       err.Error(),
 			StatusCode: 500,
 		}, err
@@ -50,6 +59,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	post_item := Item{}
 	if err := json.Unmarshal(resBodyJSONBytes, &post_item); err != nil {
 		return events.APIGatewayProxyResponse{
+			Headers:    headers,
 			Body:       err.Error(),
 			StatusCode: 500,
 		}, err
@@ -69,6 +79,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	result, err := db.GetItem(getParam)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
+			Headers:    headers,
 			Body:       err.Error(),
 			StatusCode: 404,
 		}, err
@@ -79,6 +90,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	err = dynamodbattribute.UnmarshalMap(result.Item, &item)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
+			Headers:    headers,
 			Body:       err.Error(),
 			StatusCode: 500,
 		}, err
@@ -89,7 +101,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	}
 
 	// Send Email
-	from :=  os.Getenv("Mail_Addr")
+	from := os.Getenv("Mail_Addr")
 	to := os.Getenv("Mail_Addr")
 	title := "Mail Title"
 	body := "Mail Body"
@@ -106,6 +118,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	jsonBytes, _ := json.Marshal(res)
 
 	return events.APIGatewayProxyResponse{
+		Headers:    headers,
 		Body:       string(jsonBytes),
 		StatusCode: 200,
 	}, nil
