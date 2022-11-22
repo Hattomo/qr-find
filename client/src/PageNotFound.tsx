@@ -1,10 +1,6 @@
-import { Link } from "react-router-dom";
 import './Common.css'
 
 function PageNotFound() {
-    function test() {
-        console.log("###");
-    }
     return (
         <div>
             <header className="App-header">
