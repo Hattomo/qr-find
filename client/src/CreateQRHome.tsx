@@ -1,11 +1,42 @@
 import { Link } from "react-router-dom";
 import './Common.css'
 import './CreateQRHome.css';
+import axios from "axios";
+import { useState } from "react";
 
 function CreateQRHome() {
-    function test() {
-        console.log("###");
+    const [state, setstate] = useState({
+        email: "",
+        memo: ""
+    });
+
+    function post_data() {
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+            },
+            mode: "cors",
+        };
+        console.log(state);
+        axios.post('https://vx8qxx1cnk.execute-api.us-east-1.amazonaws.com/default/create', { email: state.email, memo: state.memo }, config)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
+    const handleChange = (e: any) => {
+        console.log(e.target)
+        const { name, value } = e.target
+        setstate({ ...state, [name]: value })
+        console.log(state)
+    }
+
+    function test() {
+        console.log("test");
+    }
+
     return (
         <div>
             <header className="App-header">
@@ -18,12 +49,12 @@ function CreateQRHome() {
             <body className='App body'>
                 <div className="input-form">
                     <h3>Input Mail Address</h3>
-                    <input type="email" placeholder="Input your mail📩"></input>
+                    <input name="email" type="email" placeholder="Input your mail📩" value={state.email} onChange={(e) => handleChange(e)}></input>
                     <h3>Input Memo</h3>
-                    <textarea placeholder="Input memo &#10;ex. Macbook"></textarea>
+                    <textarea name="memo" placeholder="Input memo &#10;ex. Macbook" value={state.memo} onChange={(e) => handleChange(e)}></textarea>
                 </div>
                 <Link to="/QRGenerateHome">
-                    <button className='MakeQRButton' onClick={test}>Make QR</button>
+                    <button className='MakeQRButton' onClick={post_data} >Make QR</button>
                 </Link>
             </body>
         </div>

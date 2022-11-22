@@ -35,10 +35,19 @@ type Response struct {
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
     method := request.HTTPMethod
 
+    headers := map[string]string{
+        "Content-Type":                   "application/json",
+        "Access-Control-Allow-Origin": request.Headers["origin"],
+        "Access-Control-Allow-Methods":"OPTIONS,POST,GET",
+        "Access-Control-Allow-Headers":"Access-Control-Allow-Headers,Origin,Authorization,Accept,X-Requested-With, Content-Type",
+        "Access-Control-Allow-Credential":"true",
+    }
+
     // DBと接続するセッションを作る→DB接続
     sess, err := session.NewSession()
     if err != nil {
         return events.APIGatewayProxyResponse{
+            Headers: headers,
             Body:       err.Error(),
             StatusCode: 500,
         }, err
@@ -52,6 +61,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
     item := Item{}
     if err := json.Unmarshal(resBodyJSONBytes, &item); err != nil {
         return events.APIGatewayProxyResponse{
+            Headers: headers,
             Body:       err.Error(),
             StatusCode: 500,
         }, err
@@ -63,6 +73,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
     inputAV, err := dynamodbattribute.MarshalMap(item)
     if err != nil {
         return events.APIGatewayProxyResponse{
+            Headers: headers,
             Body:       err.Error(),
             StatusCode: 500,
         }, err
@@ -76,6 +87,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
     _, err = db.PutItem(input)
     if err != nil {
         return events.APIGatewayProxyResponse{
+            Headers: headers,
             Body:       err.Error(),
             StatusCode: 500,
         }, err
@@ -88,7 +100,9 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
     }
     jsonBytes, _ := json.Marshal(res)
 
+
     return events.APIGatewayProxyResponse{
+        Headers: headers,
         Body:       string(jsonBytes),
         StatusCode: 200,
     }, nil
