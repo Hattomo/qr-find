@@ -22,9 +22,10 @@ function FoundQRHome() {
                 "Content-type": "application/json",
             },
         };
-        axios.post(config.send_api, { message: "wwww", id: "ed36debb5e2919a1f8911c2" }, post_config)
+        axios.post(config.send_api, { memo: "wwww", id: "0402d1de05b8720dda9c750142f80ffcd3e34c90170975d6cc61793" }, post_config)
             .then(function (response) {
                 console.log(response);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -44,7 +45,7 @@ function FoundQRHome() {
                     <button className='ScanQRButton' onClick={test}>Scan QR</button>
                 </Link>
                 <h3>Input messages to ower</h3>
-                <textarea placeholder="Input meassage. &#10;ex. &#10; I found at starbacks in Tokyo station and delived to Tokyo police box" value={message} onChange={(e) => handleChange(e)}></textarea>
+                <textarea required placeholder="Input meassage. &#10;ex. &#10; I found at starbacks in Tokyo station and delived to Tokyo police box" value={message} onChange={(e) => handleChange(e)}></textarea>
                 <p></p>
                 <button className='ScanQRButton' onClick={post_data}>Submit</button>
                 <p></p>

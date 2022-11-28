@@ -101,9 +101,9 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	// Send Email
 	from := os.Getenv("Mail_Addr")
-	to := os.Getenv("Mail_Addr")
-	title := "Mail Title"
-	body := "Mail Body"
+	to := os.Getenv(string(item.Email))
+	title := "Your item is found!"
+	body := "test:" + string(item.Memo) +"\n"+ string(item.ID) + "\n" + string(item.Email) + "\n" + string(post_item.Memo) + "\n"
 	mail_err := SendEmail(from, to, title, body)
 	if mail_err != nil {
 		log.Println("mail sending error")
