@@ -84,6 +84,14 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		}, err
 	}
 
+	if len(result.Item) == 0 {
+		return events.APIGatewayProxyResponse{
+			Headers:    headers,
+			Body:       "Not Found",
+			StatusCode: 404,
+		}, nil
+	}
+
 	// 結果を構造体にパース
 	item := Item{}
 	err = dynamodbattribute.UnmarshalMap(result.Item, &item)
@@ -101,9 +109,9 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	// Send Email
 	from := os.Getenv("Mail_Addr")
-	to := os.Getenv(string(item.Email))
+	to := string(item.Email)
 	title := "Your item is found!"
-	body := "test:" + string(item.Memo) +"\n"+ string(item.ID) + "\n" + string(item.Email) + "\n" + string(post_item.Memo) + "\n"
+	body := "Your item QR Code is scaned!🐳\nYour memo is " + string(item.Memo) +"\nYour item id is " + string(item.ID) + "\nYour registered email is " + string(item.Email) + "\nMessage from the person who scaned your QR Code : " + string(post_item.Memo) + "\nWe hope you will find your item soon!🐳"
 	mail_err := SendEmail(from, to, title, body)
 	if mail_err != nil {
 		log.Println("mail sending error")
