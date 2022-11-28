@@ -34,11 +34,10 @@ type Response struct {
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	method := request.HTTPMethod
 	headers := map[string]string{
-		"Content-Type":                 "application/json",
-		"Access-Control-Allow-Origin": "http://localhost:3000",
-		"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-		"Access-Control-Allow-Headers": "Content-Type, Origin,Authorization,Accept,X-Requested-With",
-		"Access-Control-Allow-Credential": "true",
+		"Content-Type": "application/json",
+        "Access-Control-Allow-Origin": request.Headers["origin"],
+        "Access-Control-Allow-Methods":"OPTIONS,POST,GET",
+        "Access-Control-Allow-Headers":"Access-Control-Allow-Headers,Origin,Authorization,Accept,X-Requested-With, Content-Type",
 	}
 	// pathparam := request.PathParameters["id"]
 	// DB接続

@@ -21,8 +21,6 @@ function FoundQRHome() {
             headers: {
                 "Content-type": "application/json",
             },
-            crossorigin: true,
-            mode: 'no-cors',
         };
         axios.post(config.send_api, { message: "wwww", id: "ed36debb5e2919a1f8911c2" }, post_config)
             .then(function (response) {
