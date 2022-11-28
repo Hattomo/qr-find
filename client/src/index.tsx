@@ -7,7 +7,6 @@ import FoundQRHome from "./FoundQRHome";
 import QRReaderHome from './QRReaderHome';
 import QRGenerateHome from './QRGenerateHome';
 import PageNotFound from './PageNotFound'
-import Loading from './Loading'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,7 +20,6 @@ root.render(
         <Route path="/CreateQRHome" element={<CreateQRHome />} />
         <Route path="/QRReaderHome" element={<QRReaderHome />} />
         <Route path="/QRGenerateHome" element={<QRGenerateHome />} />
-        <Route path="/Loading" element={<Loading />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

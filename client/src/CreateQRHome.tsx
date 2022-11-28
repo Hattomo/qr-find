@@ -24,6 +24,10 @@ function CreateQRHome() {
         error: false,
     })
 
+    const [snacks_error_msg, set_snacks_error_msg] = useState(
+        "Error Occured! 😱"
+    );
+
     const snackstatehandleOpen = (state: string) => {
         set_snacks_state({ ...snacks_state, [state]: true });
     }
@@ -38,6 +42,12 @@ function CreateQRHome() {
     }
 
     function make_qr(): void {
+        if (state.email === "" || state.memo === "") {
+            set_snacks_error_msg("Email or Memo is empty! 😱");
+            snackstatehandleOpen("error");
+            console.log("Email or Memo is empty! 😱");
+            return;
+        }
         snackstatehandleOpen("waiting");
 
         const post_config = {
@@ -51,15 +61,13 @@ function CreateQRHome() {
                 const res: CreateApiResponse = { status: response.status, data: { qr_id: response.data.Result.ID, email: state.email, memo: state.memo } };
                 console.log(response);
                 if (res.status === 200) {
+                    setstate({ email: "", memo: "" });
                     navigate("/QRGenerateHome", { state: res});
-                } else {
-                    console.log("error");
-                    snackstatehandleOpen("error");
                 }
-
             })
             .catch(function (error) {
                 console.log(error);
+                set_snacks_error_msg("Error Occured! 😱 Please try again later");
                 snackstatehandleOpen("error");
             });
     }
@@ -80,9 +88,7 @@ function CreateQRHome() {
                     <h3>Input Memo</h3>
                     <textarea required name="memo" placeholder="Input memo &#10;ex. Macbook" value={state.memo} onChange={(e) => texthandleChange(e)}></textarea>
                 </div>
-                {/* <Link to="/QRGenerateHome"> */}
-                    <button className='MakeQRButton' onClick={make_qr} >Make QR</button>
-                {/* </Link> */}
+                <button className='MakeQRButton' onClick={make_qr} >Make QR</button>
 
                 <Snackbar
                     open={snacks_state.error}
@@ -90,7 +96,7 @@ function CreateQRHome() {
                     onClose={() => snackstatehandleClose("error")}
                 >
                     <Alert onClose={() => snackstatehandleClose("error")} severity="error" sx={{ width: '100%' }}>
-                        Error Occured! 😱
+                        {snacks_error_msg}
                     </Alert>
                 </Snackbar>
 
