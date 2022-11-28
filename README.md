@@ -8,6 +8,14 @@ npm --legacy-peer-deps install
 npm start
 ```
 
+You shoud add `/client/src/config.json`
+```json
+{
+    "create_api": "create_api URL",
+    "send_api": "send_api URL"
+}
+```
+
 ### Technology under consideration
 #### React
 - [ ] emotion
