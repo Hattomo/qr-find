@@ -72,7 +72,7 @@ function FoundQRHome() {
     return (
         <>
             <header className="App-header">
-                <h1>QR Find</h1>
+                <h1>QR Found</h1>
                 <Link to="/CreateQRHome">
                     <button className="CreatePageButton" onClick={test}>Create QR →</button>
                 </Link>
